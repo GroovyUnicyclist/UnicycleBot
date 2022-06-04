@@ -10,7 +10,6 @@
         "moduleResolution": "node",
         "resolveJsonModule": true,
         "outDir": "out",
-        "watch": true,
         "skipLibCheck": true,
 
         /* Experimental Options */
