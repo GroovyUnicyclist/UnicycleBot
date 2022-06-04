@@ -1,0 +1,547 @@
+{
+    "players": {
+        "112363964641353728": {
+            "score": 15,
+            "tricks": [
+                "bunnyhop",
+                "freemount",
+                "rollinghop"
+            ]
+        },
+        "123970807331291139": {
+            "score": 4,
+            "tricks": [
+                "freemount"
+            ]
+        },
+        "126095671412391936": {
+            "score": 15,
+            "tricks": [
+                "bunnyhop",
+                "halfrev",
+                "legwrap mount"
+            ]
+        },
+        "143092969006825472": {
+            "score": 46,
+            "tricks": [
+                "180 hoptwist",
+                "crankgrab",
+                "freemount",
+                "halfrev",
+                "jump mount",
+                "one foot riding 3 revs",
+                "sif riding 3 revs"
+            ]
+        },
+        "152177634179022848": {
+            "score": 75,
+            "tricks": [
+                "180 sidespin mount",
+                "270 unispin",
+                "90 unispin",
+                "bunnyhop",
+                "inspin",
+                "legwrap mount",
+                "rollingwrap",
+                "sidejump mount",
+                "steeze mount"
+            ]
+        },
+        "172509235282706441": {
+            "score": 9,
+            "tricks": [
+                "wheel walk 3 revs"
+            ]
+        },
+        "214968265498296320": {
+            "score": 48,
+            "tricks": [
+                "180 hoptwist",
+                "180 unispin",
+                "bunnyhop",
+                "jump mount",
+                "kick-up mount",
+                "legwrap mount",
+                "one foot idle 3 revs",
+                "suicide mount"
+            ]
+        },
+        "256497436380364810": {
+            "score": 13,
+            "tricks": [
+                "bunnyhop",
+                "freemount",
+                "idle"
+            ]
+        },
+        "309141895567900672": {
+            "score": 10,
+            "tricks": [
+                "360 unispin"
+            ]
+        },
+        "353356815028977675": {
+            "score": 40,
+            "tricks": [
+                "180 hoptwist",
+                "180 unispin",
+                "bunnyhop",
+                "crankflip mount",
+                "idle",
+                "suicide mount"
+            ]
+        },
+        "443231805185851392": {
+            "score": 48,
+            "tricks": [
+                "freemount",
+                "jump mount",
+                "kick-up mount",
+                "legwrap mount",
+                "rolling mount",
+                "stillstand 5 seconds",
+                "wheel walk 3 revs"
+            ]
+        },
+        "450471685175508993": {
+            "score": 14,
+            "tricks": [
+                "one foot idle 3 revs",
+                "one foot riding 3 revs"
+            ]
+        },
+        "518340488282243073": {
+            "score": 24,
+            "tricks": [
+                "one foot idle 3 revs",
+                "rolling mount",
+                "rollinghop"
+            ]
+        },
+        "666739029651357696": {
+            "score": 115,
+            "tricks": [
+                "180 hoptwist",
+                "backwards riding 3 revs",
+                "bunnyhop",
+                "freemount",
+                "halfrev",
+                "idle",
+                "jump mount",
+                "legwrap mount",
+                "one foot idle 3 revs",
+                "one foot idle mount",
+                "one foot riding 3 revs",
+                "rear mount",
+                "rolling mount",
+                "sib riding 3 revs",
+                "sif riding 3 revs",
+                "stomach on seat riding 3 revs"
+            ]
+        },
+        "732026160745283634": {
+            "score": 46,
+            "tricks": [
+                "90 unispin",
+                "bunnyhop",
+                "crankgrab legwrap",
+                "kick-up mount",
+                "outspin mount",
+                "suicide mount"
+            ]
+        },
+        "781183789774536754": {
+            "score": 16,
+            "tricks": [
+                "freemount",
+                "jump mount",
+                "sif riding 3 revs"
+            ]
+        },
+        "796046797679755294": {
+            "score": 90,
+            "tricks": [
+                "180 hoptwist",
+                "180 unispin",
+                "backwards riding 3 revs",
+                "bunnyhop",
+                "crankflip mount",
+                "crankgrab",
+                "idle",
+                "jump mount",
+                "kick-up mount",
+                "legwrap mount",
+                "one foot riding 3 revs",
+                "sidejump mount",
+                "sif riding 3 revs"
+            ]
+        }
+    },
+    "tricks": {
+        "180 hoptwist": {
+            "example": "",
+            "exampleId": "",
+            "tutorial": "",
+            "score": 6,
+            "recipients": [
+                "143092969006825472",
+                "214968265498296320",
+                "353356815028977675",
+                "666739029651357696",
+                "796046797679755294"
+            ]
+        },
+        "180 sidespin mount": {
+            "example": "",
+            "exampleId": "",
+            "tutorial": "",
+            "score": 10,
+            "recipients": [
+                "152177634179022848"
+            ]
+        },
+        "180 unispin": {
+            "example": "",
+            "exampleId": "",
+            "tutorial": "",
+            "score": 8,
+            "recipients": [
+                "214968265498296320",
+                "353356815028977675",
+                "796046797679755294"
+            ]
+        },
+        "270 unispin": {
+            "example": "",
+            "exampleId": "",
+            "tutorial": "",
+            "score": 10,
+            "recipients": [
+                "152177634179022848"
+            ]
+        },
+        "360 unispin": {
+            "example": "https://canary.discord.com/channels/214097609801990146/844652994858319884/948493351408267294",
+            "exampleId": "309141895567900672",
+            "tutorial": "",
+            "score": 10,
+            "recipients": [
+                "309141895567900672"
+            ]
+        },
+        "90 unispin": {
+            "example": "",
+            "exampleId": "",
+            "tutorial": "",
+            "score": 9,
+            "recipients": [
+                "152177634179022848",
+                "732026160745283634"
+            ]
+        },
+        "backwards riding 3 revs": {
+            "example": "",
+            "exampleId": "",
+            "tutorial": "",
+            "score": 9,
+            "recipients": [
+                "666739029651357696",
+                "796046797679755294"
+            ]
+        },
+        "bunnyhop": {
+            "example": "",
+            "exampleId": "",
+            "tutorial": "",
+            "score": 2,
+            "recipients": [
+                "112363964641353728",
+                "126095671412391936",
+                "152177634179022848",
+                "214968265498296320",
+                "256497436380364810",
+                "353356815028977675",
+                "666739029651357696",
+                "732026160745283634",
+                "796046797679755294"
+            ]
+        },
+        "crankflip mount": {
+            "example": "",
+            "exampleId": "",
+            "tutorial": "",
+            "score": 9,
+            "recipients": [
+                "353356815028977675",
+                "796046797679755294"
+            ]
+        },
+        "crankgrab": {
+            "example": "https://canary.discord.com/channels/214097609801990146/844652994858319884/943970257880633434",
+            "exampleId": "434946269815767051",
+            "tutorial": "https://youtu.be/uoaHACiQZCI?t=140",
+            "score": 9,
+            "recipients": [
+                "143092969006825472",
+                "796046797679755294"
+            ]
+        },
+        "crankgrab legwrap": {
+            "example": "",
+            "exampleId": "",
+            "tutorial": "",
+            "score": 10,
+            "recipients": [
+                "732026160745283634"
+            ]
+        },
+        "freemount": {
+            "example": "",
+            "exampleId": "",
+            "tutorial": "",
+            "score": 4,
+            "recipients": [
+                "112363964641353728",
+                "123970807331291139",
+                "143092969006825472",
+                "256497436380364810",
+                "443231805185851392",
+                "666739029651357696",
+                "781183789774536754"
+            ]
+        },
+        "halfrev": {
+            "example": "",
+            "exampleId": "",
+            "tutorial": "",
+            "score": 8,
+            "recipients": [
+                "126095671412391936",
+                "143092969006825472",
+                "666739029651357696"
+            ]
+        },
+        "idle": {
+            "example": "",
+            "exampleId": "",
+            "tutorial": "",
+            "score": 7,
+            "recipients": [
+                "256497436380364810",
+                "353356815028977675",
+                "666739029651357696",
+                "796046797679755294"
+            ]
+        },
+        "inspin": {
+            "example": "",
+            "exampleId": "",
+            "tutorial": "",
+            "score": 10,
+            "recipients": [
+                "152177634179022848"
+            ]
+        },
+        "jump mount": {
+            "example": "",
+            "exampleId": "",
+            "tutorial": "",
+            "score": 5,
+            "recipients": [
+                "143092969006825472",
+                "214968265498296320",
+                "443231805185851392",
+                "666739029651357696",
+                "781183789774536754",
+                "796046797679755294"
+            ]
+        },
+        "kick-up mount": {
+            "example": "",
+            "exampleId": "",
+            "tutorial": "",
+            "score": 7,
+            "recipients": [
+                "214968265498296320",
+                "443231805185851392",
+                "732026160745283634",
+                "796046797679755294"
+            ]
+        },
+        "legwrap mount": {
+            "example": "",
+            "exampleId": "",
+            "tutorial": "",
+            "score": 5,
+            "recipients": [
+                "126095671412391936",
+                "152177634179022848",
+                "214968265498296320",
+                "443231805185851392",
+                "666739029651357696",
+                "796046797679755294"
+            ]
+        },
+        "one foot idle 3 revs": {
+            "example": "",
+            "exampleId": "",
+            "tutorial": "",
+            "score": 7,
+            "recipients": [
+                "214968265498296320",
+                "450471685175508993",
+                "518340488282243073",
+                "666739029651357696"
+            ]
+        },
+        "one foot idle mount": {
+            "example": "",
+            "exampleId": "",
+            "tutorial": "",
+            "score": 10,
+            "recipients": [
+                "666739029651357696"
+            ]
+        },
+        "one foot riding 3 revs": {
+            "example": "",
+            "exampleId": "",
+            "tutorial": "",
+            "score": 7,
+            "recipients": [
+                "143092969006825472",
+                "450471685175508993",
+                "666739029651357696",
+                "796046797679755294"
+            ]
+        },
+        "outspin mount": {
+            "example": "",
+            "exampleId": "",
+            "tutorial": "",
+            "score": 10,
+            "recipients": [
+                "732026160745283634"
+            ]
+        },
+        "rear mount": {
+            "example": "",
+            "exampleId": "",
+            "tutorial": "",
+            "score": 10,
+            "recipients": [
+                "666739029651357696"
+            ]
+        },
+        "rolling mount": {
+            "example": "",
+            "exampleId": "",
+            "tutorial": "",
+            "score": 8,
+            "recipients": [
+                "443231805185851392",
+                "518340488282243073",
+                "666739029651357696"
+            ]
+        },
+        "rollinghop": {
+            "example": "",
+            "exampleId": "",
+            "tutorial": "",
+            "score": 9,
+            "recipients": [
+                "112363964641353728",
+                "518340488282243073"
+            ]
+        },
+        "rollingwrap": {
+            "example": "",
+            "exampleId": "",
+            "tutorial": "",
+            "score": 10,
+            "recipients": [
+                "152177634179022848"
+            ]
+        },
+        "sib riding 3 revs": {
+            "example": "",
+            "exampleId": "",
+            "tutorial": "",
+            "score": 10,
+            "recipients": [
+                "666739029651357696"
+            ]
+        },
+        "sidejump mount": {
+            "example": "",
+            "exampleId": "",
+            "tutorial": "",
+            "score": 9,
+            "recipients": [
+                "152177634179022848",
+                "796046797679755294"
+            ]
+        },
+        "sif riding 3 revs": {
+            "example": "",
+            "exampleId": "",
+            "tutorial": "",
+            "score": 7,
+            "recipients": [
+                "143092969006825472",
+                "666739029651357696",
+                "781183789774536754",
+                "796046797679755294"
+            ]
+        },
+        "steeze mount": {
+            "example": "",
+            "exampleId": "",
+            "tutorial": "",
+            "score": 10,
+            "recipients": [
+                "152177634179022848"
+            ]
+        },
+        "stillstand 5 seconds": {
+            "example": "",
+            "exampleId": "",
+            "tutorial": "",
+            "score": 10,
+            "recipients": [
+                "443231805185851392"
+            ]
+        },
+        "stomach on seat riding 3 revs": {
+            "example": "",
+            "exampleId": "",
+            "tutorial": "",
+            "score": 10,
+            "recipients": [
+                "666739029651357696"
+            ]
+        },
+        "suicide mount": {
+            "example": "",
+            "exampleId": "",
+            "tutorial": "",
+            "score": 8,
+            "recipients": [
+                "214968265498296320",
+                "353356815028977675",
+                "732026160745283634"
+            ]
+        },
+        "wheel walk 3 revs": {
+            "example": "",
+            "exampleId": "",
+            "tutorial": "",
+            "score": 9,
+            "recipients": [
+                "172509235282706441",
+                "443231805185851392"
+            ]
+        }
+    }
+}

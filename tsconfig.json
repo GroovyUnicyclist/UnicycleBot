@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "target": "ES6",
+        "module": "CommonJS",
+        "strict": true,
+        "alwaysStrict": true,
+        "noUncheckedIndexedAccess": true,
+        "noImplicitOverride": true,
+        "esModuleInterop": true,
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "outDir": "out",
+        "watch": true,
+        "skipLibCheck": true,
+
+        /* Experimental Options */
+        "experimentalDecorators": true /* Enables experimental support for ES7 decorators. */,
+        "emitDecoratorMetadata": true /* Enables experimental support for emitting type metadata for decorators. */,
+    },
+    "exclude": ["testing"]
+  }

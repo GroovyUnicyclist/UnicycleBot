@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model player {
+  id           BigInt         @id(map: "players_pkey")
+  score        BigInt         @default(0)
+  tricks       String[]       @db.VarChar(128)
+  player_trick player_trick[]
+}
+
+model player_trick {
+  player_id  BigInt
+  trick_name String @db.VarChar(128)
+  player     player @relation(fields: [player_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_player")
+  trick      trick  @relation(fields: [trick_name], references: [name], onDelete: NoAction, onUpdate: NoAction, map: "fk_trick")
+
+  @@id([player_id, trick_name], map: "player_trick_id")
+}
+
+model trick {
+  name           String         @id(map: "tricks_pkey") @db.VarChar(128)
+  example_video  String?
+  example_link   String?
+  example_player BigInt?
+  tutorial       String?
+  score          BigInt         @default(10)
+  players        BigInt[]
+  player_trick   player_trick[]
+}

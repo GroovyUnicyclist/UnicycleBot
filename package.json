@@ -1,0 +1,26 @@
+{
+  "dependencies": {
+    "@discordjs/builders": "^0.8.2",
+    "@discordjs/rest": "^0.1.0-canary.0",
+    "@prisma/client": "^3.14.0",
+    "discord-api-types": "^0.24.0",
+    "discord.js": "^14.0.0-dev.1652918983-adf461b",
+    "dotenv": "^10.0.0"
+  },
+  "devDependencies": {
+    "@babel/code-frame": "^7.16.7",
+    "@babel/core": "^7.17.12",
+    "@babel/plugin-syntax-bigint": "^7.8.3",
+    "@babel/plugin-syntax-import-meta": "^7.10.4",
+    "@babel/preset-env": "^7.17.12",
+    "@babel/traverse": "^7.17.12",
+    "@types/jest": "^27.5.1",
+    "babel-jest": "^28.1.0",
+    "jest": "^28.1.0",
+    "prisma": "^3.14.0",
+    "ts-jest": "^28.0.2"
+  },
+  "scripts": {
+    "test": "jest"
+  }
+}
