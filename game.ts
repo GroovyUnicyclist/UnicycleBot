@@ -297,7 +297,7 @@ export class Game {
     public async addTrickRecipient(trickName: string, playerId: string): Promise<boolean> {
         try {
             const trick = await this.getTrick(trickName);
-            const oldScore = trick ? this.calculateScore(trick.players) : BigInt(10);
+            const oldScore = trick ? trick.score : BigInt(10);
             const players = trick ? [...trick.players, BigInt(playerId)] : [BigInt(playerId)];
             const newScore = trick ? this.calculateScore(players) : BigInt(10);
             const updatedTrick = await this.prisma.trick.upsert({
@@ -315,8 +315,8 @@ export class Game {
             for (const playerToUpdate of updatedTrick.players) {
                 const player = await this.getPlayer(playerToUpdate);
                 const tricks = player ? [...player.tricks, updatedTrick.name] : [updatedTrick.name];
-                const playerScore = player ? player.score : oldScore;
-                const score = playerScore - oldScore + newScore;
+                const playerScore = player ? player.score : BigInt(0);
+                const score = player && player.tricks.includes(updatedTrick.name) ? playerScore - oldScore + newScore : playerScore + newScore;
                 operations.push(this.prisma.player.upsert({
                     where: { id: playerToUpdate },
                     update: {

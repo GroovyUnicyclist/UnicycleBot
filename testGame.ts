@@ -15,9 +15,9 @@ const game = new Game(prisma)
 
 async function resetData() {
     await prisma.$transaction([
+        prisma.player_trick.deleteMany({}),
         prisma.trick.deleteMany({}),
-        prisma.player.deleteMany({}),
-        prisma.player_trick.deleteMany({})
+        prisma.player.deleteMany({})
     ])
 
     var data: GameData = untypedData ?? {"players": {}, "tricks": {}};
