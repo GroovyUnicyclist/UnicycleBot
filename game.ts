@@ -501,10 +501,9 @@ export class Game {
                             example_player: trick.example_player,
                             tutorial: trick.tutorial,
                             score: trick.score,
-                            players: trick.players,
+                            players: [],
                         }
-                    }),
-                    this.prisma.trick.delete({ where: { name: trickName }})
+                    })
                 ];
                 for (const playerTrick of playerTricks) {
                     if (!players.includes(playerTrick.player_id)) {
@@ -512,18 +511,26 @@ export class Game {
                         if (player) {
                             const trickIndex = player.tricks.indexOf(trickName);
                             if (trickIndex >= 0) {
+                                const newTricks = [...player.tricks];
+                                newTricks.splice(trickIndex, 1, newTrickName);
                                 operations.push(this.prisma.player.update({
-                                    where: { id: playerTrick.player_id },
-                                    data: { tricks: player.tricks.splice(trickIndex, 1, newTrickName) }
+                                    where: { id: player.id },
+                                    data: { tricks: newTricks }
                                 }));
                             }
                         }
+                        players.push(playerTrick.player_id);
                     }
                 }
                 operations.push(this.prisma.player_trick.updateMany({
                     where: { trick_name: trickName },
                     data: { trick_name: newTrickName }
                 }));
+                operations.push(this.prisma.trick.update({
+                    where: { name: newTrickName },
+                    data: { players: trick.players }
+                }));
+                operations.push(this.prisma.trick.delete({ where: { name: trickName }}));
                 this.prisma.$transaction(operations);
                 return true;
             }

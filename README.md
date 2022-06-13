@@ -19,6 +19,6 @@ Run `node out/bot.js`
 
 ## Updating The Bot
 1. Run `git pull`
-2. Run `tnpx sc`
+2. Run `npx tsc`
 3. Run `node out/commands.js` to update the slash commands if necessary
 4. Run the bot as desctibed above if using option 1
