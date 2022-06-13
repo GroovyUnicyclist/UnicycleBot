@@ -23,7 +23,7 @@ export class Game {
 
     private async updateAllPlayers(): Promise<boolean> {
         try {
-            var operations: any[] = [];
+            let operations: any[] = [];
             const players = await this.prisma.player.findMany();
             for (const player of players) {
                 operations.push(...await this.getPlayerUpdateQueries(player.id));
@@ -66,9 +66,9 @@ export class Game {
                 where: { id: playerId }
             });
             if (player) {
-                var score: bigint = BigInt(0);
-                var playerTrickStrings: string[] = [];
-                var newPlayerTricks: {data: player_trick[]} = {data: []};
+                let score: bigint = BigInt(0);
+                let playerTrickStrings: string[] = [];
+                let newPlayerTricks: {data: player_trick[]} = {data: []};
                 const playerTricks = await this.prisma.player_trick.findMany({
                     where: { player_id: playerId }
                 });
@@ -119,7 +119,7 @@ export class Game {
 
     private async updateAllTrickScores(): Promise<boolean> {
         try {
-            var operations:any[] = [];
+            let operations:any[] = [];
             const tricks = await this.prisma.trick.findMany();
             for (const trick of tricks) {
                 operations.push(...await this.getTrickScoreUpdateQueries(trick.name));
@@ -205,13 +205,13 @@ export class Game {
 
     // Utilities
     private calculateScore(players: bigint[]): bigint {
-        var score = BigInt(11) - BigInt(players.length);
+        let score = BigInt(11) - BigInt(players.length);
         if (score < 1) score = BigInt(1);
         return score;
     }
 
     public async getTrickAutocompleteOptions(query: string, includeQuery = false): Promise<ApplicationCommandOptionChoiceData[]> {
-        var options: ApplicationCommandOptionChoiceData[] = [];
+        let options: ApplicationCommandOptionChoiceData[] = [];
         const tricks = await this.getAllTricksAlphabetical();
         tricks.forEach(trick => {
             if (trick.name.indexOf(query.toLowerCase()) >= 0 && !(trick.name === query && includeQuery)) {
@@ -241,8 +241,8 @@ export class Game {
 
     // Pagination
     private async getPaginatedData(page: number = 1, type: 'leaderboard' | 'tricks' | 'playerTricks' | 'trick', option: string | null = null): Promise<any[]> {
-        var pageLimit = -1
-        var dataset: string[] | bigint[] | player[] | trick[] = []
+        let pageLimit = -1
+        let dataset: string[] | bigint[] | player[] | trick[] = []
         switch (type) {
             case 'leaderboard':
                 pageLimit = await this.getLeaderboardPages();
@@ -267,8 +267,8 @@ export class Game {
                 }
         }
         if (page > 0 && page <= pageLimit) {
-            var start = (page - 1)*PAGE_SIZE;
-            var end = page*PAGE_SIZE;
+            let start = (page - 1)*PAGE_SIZE;
+            let end = page*PAGE_SIZE;
             if (page === pageLimit) {
                 end = dataset.length;
             }
@@ -296,48 +296,54 @@ export class Game {
     // Core Queries
     public async addTrickRecipient(trickName: string, playerId: string): Promise<boolean> {
         try {
-            const trick = await this.getTrick(trickName);
-            const oldScore = trick ? trick.score : BigInt(10);
-            const players = trick ? [...trick.players, BigInt(playerId)] : [BigInt(playerId)];
-            const newScore = trick ? this.calculateScore(players) : BigInt(10);
-            const updatedTrick = await this.prisma.trick.upsert({
-                where: { name: trickName },
-                update: {
-                    score: newScore,
-                    players: players
-                },
-                create: {
-                    name: trickName,
-                    players: players
-                }
+            const playerTrick = await this.prisma.player_trick.findUnique({
+                where: { player_id_trick_name: { player_id: BigInt(playerId), trick_name: trickName }}
             });
-            var operations: any[] = [];
-            for (const playerToUpdate of updatedTrick.players) {
-                const player = await this.getPlayer(playerToUpdate);
-                const tricks = player ? [...player.tricks, updatedTrick.name] : [updatedTrick.name];
-                const playerScore = player ? player.score : BigInt(0);
-                const score = player && player.tricks.includes(updatedTrick.name) ? playerScore - oldScore + newScore : playerScore + newScore;
-                operations.push(this.prisma.player.upsert({
-                    where: { id: playerToUpdate },
+            if (!playerTrick) {
+                const trick = await this.getTrick(trickName);
+                const oldScore = trick ? trick.score : BigInt(10);
+                const players = trick ? [...trick.players, BigInt(playerId)] : [BigInt(playerId)];
+                const newScore = trick ? this.calculateScore(players) : BigInt(10);
+                const updatedTrick = await this.prisma.trick.upsert({
+                    where: { name: trickName },
                     update: {
-                        score: score,
-                        tricks: tricks
+                        score: newScore,
+                        players: players
                     },
                     create: {
-                        id: playerToUpdate, 
-                        score: score,
-                        tricks: tricks
+                        name: trickName,
+                        players: players
+                    }
+                });
+                let operations: any[] = [];
+                for (const playerToUpdate of updatedTrick.players) {
+                    const player = await this.getPlayer(playerToUpdate);
+                    const tricks = player ? [...player.tricks, updatedTrick.name] : [updatedTrick.name];
+                    const playerScore = player ? player.score : BigInt(0);
+                    const score = player && player.tricks.includes(updatedTrick.name) ? playerScore - oldScore + newScore : playerScore + newScore;
+                    operations.push(this.prisma.player.upsert({
+                        where: { id: playerToUpdate },
+                        update: {
+                            score: score,
+                            tricks: tricks
+                        },
+                        create: {
+                            id: playerToUpdate, 
+                            score: score,
+                            tricks: tricks
+                        }
+                    }));
+                }
+                operations.push(this.prisma.player_trick.create({
+                    data: {
+                        player_id: BigInt(playerId),
+                        trick_name: updatedTrick.name
                     }
                 }));
+                await this.prisma.$transaction(operations);
+                return true;
             }
-            operations.push(this.prisma.player_trick.create({
-                data: {
-                    player_id: BigInt(playerId),
-                    trick_name: updatedTrick.name
-                }
-            }));
-            await this.prisma.$transaction(operations);
-            return true;
+            return false;
         } catch(error) {
             console.error(error);
             return false;
@@ -355,7 +361,13 @@ export class Game {
             if (player && trick) {
                 const beforeScore = trick.score
                 const afterScore = this.calculateScore(trick.players.splice(trick.players.indexOf(BigInt(playerId)), 1))
-                var operations: any[] = [];
+                let operations: any[] = [];
+                operations.push(this.prisma.player_trick.deleteMany({
+                    where: {
+                        player_id: BigInt(playerId),
+                        trick_name: trickName
+                    }
+                }));
                 operations.push(this.prisma.player.update({
                     where: { id: BigInt(playerId) },
                     data: {
@@ -379,12 +391,6 @@ export class Game {
                         }));
                     }
                 }
-                operations.push(this.prisma.player_trick.deleteMany({
-                    where: {
-                        player_id: BigInt(playerId),
-                        trick_name: trickName
-                    }
-                }));
                 await this.prisma.$transaction(operations)
                 return true;
             }
@@ -397,7 +403,7 @@ export class Game {
     
     public async removeTrick(trickName: string): Promise<boolean> {
         try {
-            var operations: any[] = [];
+            let operations: any[] = [];
             const trick = await this.prisma.trick.findUnique({
                 where: { name: trickName }
             });
@@ -440,7 +446,7 @@ export class Game {
             });
             if (trick && trickToBeMerged) {
                 const score = this.calculateScore([...trick.players, ...trickToBeMerged.players])
-                var operations: any[] = [];
+                let operations: any[] = [];
                 for (const player of trick.players) {
                     const otherPlayer = await this.getPlayer(player);
                     if (otherPlayer) {
@@ -469,6 +475,56 @@ export class Game {
                     where: { name: trickToBeMerged.name }
                 }));
                 await this.prisma.$transaction(operations);
+                return true;
+            }
+            return false;
+        } catch (error) {
+            console.error(error);
+            return false;
+        }
+    }
+
+    public async renameTrick(trickName: string, newTrickName: string): Promise<boolean> {
+        try {
+            const trick = await this.getTrick(trickName);
+            if (trick) {
+                const playerTricks = await this.prisma.player_trick.findMany({
+                    where: { trick_name: trickName }
+                });
+                let players: bigint[] = [];
+                let operations: any[] = [
+                    this.prisma.trick.create({
+                        data: {
+                            name: newTrickName,
+                            example_video: trick.example_video,
+                            example_link: trick.example_link,
+                            example_player: trick.example_player,
+                            tutorial: trick.tutorial,
+                            score: trick.score,
+                            players: trick.players,
+                        }
+                    }),
+                    this.prisma.trick.delete({ where: { name: trickName }})
+                ];
+                for (const playerTrick of playerTricks) {
+                    if (!players.includes(playerTrick.player_id)) {
+                        const player = await this.getPlayer(playerTrick.player_id);
+                        if (player) {
+                            const trickIndex = player.tricks.indexOf(trickName);
+                            if (trickIndex >= 0) {
+                                operations.push(this.prisma.player.update({
+                                    where: { id: playerTrick.player_id },
+                                    data: { tricks: player.tricks.splice(trickIndex, 1, newTrickName) }
+                                }));
+                            }
+                        }
+                    }
+                }
+                operations.push(this.prisma.player_trick.updateMany({
+                    where: { trick_name: trickName },
+                    data: { trick_name: newTrickName }
+                }));
+                this.prisma.$transaction(operations);
                 return true;
             }
             return false;

@@ -24,9 +24,11 @@ function createButtons(disabled: boolean = false): any {
 }
 
 async function executeCommand(interaction: ChatInputCommandInteraction, game: Game) {
+    let fileUpload = undefined
+    let fileLink = undefined
     try {
-        var fileUpload = interaction.options.get('video_upload')?.attachment?.attachment
-        var fileLink = interaction.options.get('video_link')?.value
+        fileUpload = interaction.options.get('video_upload')?.attachment?.attachment
+        fileLink = interaction.options.get('video_link')?.value
     } catch (error) {
         console.error(error);
         await interaction.reply({
@@ -35,7 +37,7 @@ async function executeCommand(interaction: ChatInputCommandInteraction, game: Ga
         }).catch(console.error);
     }
 
-    var video = ''
+    let video = ''
     if (!fileUpload && !fileLink) {
         await interaction.reply({
             content: "Error: video not provided",
@@ -54,8 +56,8 @@ async function executeCommand(interaction: ChatInputCommandInteraction, game: Ga
         if (channel && channel.isText()) {
             const trickName = interaction.options.get('trick_name')?.value
             if (typeof(trickName) === 'string') {
-                var submissionText = `**New trick submission from ${interaction.user}:**\n${trickName} (${await game.hasTrick(trickName) ? 'existing' : 'new'} trick)\n\n${video}`
-                var publicMessage = await interaction.reply({
+                let submissionText = `**New trick submission from ${interaction.user}:**\n${trickName} (${await game.hasTrick(trickName) ? 'existing' : 'new'} trick)\n\n${video}`
+                let publicMessage = await interaction.reply({
                     content: submissionText
                 }).catch(console.error);
                 await channel.send({
@@ -80,11 +82,11 @@ async function executeAutocomplete(interaction: AutocompleteInteraction, game: G
 }
 
 async function handleButton(interaction: ButtonInteraction, game: Game) {
-    var matches;
-    var player;
-    var trick;
-    var channelId;
-    var messageId;
+    let matches;
+    let player;
+    let trick;
+    let channelId;
+    let messageId;
     switch (interaction.customId) {
         case 'approve_trick':
             // interaction.deferReply()
@@ -109,7 +111,7 @@ async function handleButton(interaction: ButtonInteraction, game: Game) {
                 // if (messageId && channelId) {
                 //     const channel = interaction.client.channels.cache.get(channelId)
                 //     if (channel?.isTextBased()) {
-                //         var message = channel.messages.cache.get(messageId)
+                //         let message = channel.messages.cache.get(messageId)
                 //         await message?.edit(message.content + `\n\n**This trick has been approved!**`).catch(console.error)
                 //     }
                 // }
@@ -139,7 +141,7 @@ async function handleButton(interaction: ButtonInteraction, game: Game) {
                 // if (channelId && messageId) {
                 //     const channel = interaction.client.channels.cache.get(channelId)
                 //     if (channel?.isTextBased()) {
-                //         var message = channel.messages.cache.get(messageId)
+                //         let message = channel.messages.cache.get(messageId)
                 //         message?.edit(message.content + `\n\n**This trick has been denied! :(**`)
                 //     }
                 // }
@@ -171,11 +173,11 @@ async function handleButton(interaction: ButtonInteraction, game: Game) {
 
 async function executeModalSubmit(interaction: ModalSubmitInteraction, game: Game) {
     if (interaction.customId === 'rename_modal') {
-        var trick = interaction.fields.getTextInputValue('rename_modal_new_name')
-        var matches = interaction.message?.content.match(/\*\*.*<@(?<player>\d+)>:\*\*\n.+ \(.*trick\)\n\n.*\n\n{(?<channelId>\d+), (?<messageId>\d+)}/)?.groups
-        var player = matches?.player
-        var channelId = matches?.channels
-        var messageId = matches?.message
+        let trick = interaction.fields.getTextInputValue('rename_modal_new_name')
+        let matches = interaction.message?.content.match(/\*\*.*<@(?<player>\d+)>:\*\*\n.+ \(.*trick\)\n\n.*\n\n{(?<channelId>\d+), (?<messageId>\d+)}/)?.groups
+        let player = matches?.player
+        let channelId = matches?.channels
+        let messageId = matches?.message
         if (player && trick) {
             await game.addTrickRecipient(trick, player)
 
@@ -191,7 +193,7 @@ async function executeModalSubmit(interaction: ModalSubmitInteraction, game: Gam
             // if (channelId && messageId) {
             //     const channel = interaction.client.channels.cache.get(channelId)
             //     if (channel?.isTextBased()) {
-            //         var message = channel.messages.cache.get(messageId)
+            //         let message = channel.messages.cache.get(messageId)
             //         message?.edit(message.content + `\n\n**This trick has been approved!**`)
             //     }
             // }
