@@ -4,6 +4,9 @@ declare global {
         TOKEN: string;
         CLIENT_ID: string;
         GUILD_ID: string;
+        GAME_MANAGER: string;
+        DATABASE_URL: string;
+        TEST_DATABASE_URL: string;
       }
     }
   }

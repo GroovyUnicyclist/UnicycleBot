@@ -103,11 +103,11 @@ export class Game {
     }
 
     // All Tricks
-    private async getAllTricks(): Promise<trick[]> {
+    public async getAllTricks(): Promise<trick[]> {
         return await this.prisma.trick.findMany();
     }
 
-    private async getAllTricksAlphabetical(): Promise<trick[]> {
+    public async getAllTricksAlphabetical(): Promise<trick[]> {
         const allTricks = await this.prisma.trick.findMany();
         return allTricks.sort((a, b) => (a.name > b.name ? 1 : -1));
     }
