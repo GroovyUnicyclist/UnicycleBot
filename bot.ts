@@ -34,7 +34,7 @@ if (client != null) {
 
     client.on('interactionCreate', async (interaction) => {
         try {
-            var command;
+            let command;
             if (interaction.isChatInputCommand() || interaction.isContextMenuCommand() || interaction.isAutocomplete()) {
                 command = client.commands.get(interaction.commandName);
             } else if (interaction.isButton() || interaction.isModalSubmit()) {

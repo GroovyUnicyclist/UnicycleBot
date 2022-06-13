@@ -8,10 +8,10 @@ import { Game } from '../game'
  * @returns 
  */
 async function formatTricks(page: number, game: Game): Promise<string> {
-    var tricks = await game.getPaginatedTricks(page);
-    var output = "```";
-    for (var i = 0; i < tricks.length; i++) {
-        var trickScore = await game.getTrickScore(tricks[i]!.name)
+    let tricks = await game.getPaginatedTricks(page);
+    let output = "```";
+    for (let i = 0; i < tricks.length; i++) {
+        let trickScore = await game.getTrickScore(tricks[i]!.name)
         output += `${trickScore} points ${trickScore >= 10 ? "" : " "}| ${tricks[i]!.name}\n`
     }
     return tricks.length > 0  ? output + "```" : ''
@@ -63,7 +63,7 @@ async function executeCommand(interaction: ChatInputCommandInteraction, game: Ga
 }
 
 async function executeButton(interaction: ButtonInteraction, game: Game) {
-    var currentPage = parseInt(interaction.message.embeds[0]?.footer?.text.replace(/^(\d+)(.+)$/i, '$1') ?? '1');
+    let currentPage = parseInt(interaction.message.embeds[0]?.footer?.text.replace(/^(\d+)(.+)$/i, '$1') ?? '1');
     if (currentPage <= 0 || currentPage > await game.getTricksPages()) {
         await interaction.reply({
             content: 'Error: Unable to change page',

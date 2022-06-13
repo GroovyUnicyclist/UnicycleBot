@@ -3,9 +3,9 @@ import { Command } from '../command';
 import { Game } from '../game';
 
 function getStringWithSpaces(str: string, spaces: number, prepend: boolean = false): string {
-    var output = str;
-    var end = spaces - output.length;
-    for (var i = 0; i < end; i++) {
+    let output = str;
+    let end = spaces - output.length;
+    for (let i = 0; i < end; i++) {
         if (prepend) {
            output = ` ${output}` 
         } else {
@@ -17,10 +17,10 @@ function getStringWithSpaces(str: string, spaces: number, prepend: boolean = fal
 }
 
 async function formatPlayerTricks(user: string, page: number, game: Game): Promise<string> {
-    var output = "";
-    var tricks = await game.getPaginatedPlayerTricks(user, page);
+    let output = "";
+    let tricks = await game.getPaginatedPlayerTricks(user, page);
     for (const trick of tricks) {
-        var trickScore = await game.getTrickScore(trick)
+        let trickScore = await game.getTrickScore(trick)
         if (trickScore >= 0) {
             output += `\`${getStringWithSpaces(trickScore + ' points', 9)} | \`${trick}\n`
         }
@@ -52,7 +52,7 @@ async function createPlayerEmbed(user: string, page: number, totalPages: number,
 }
 
 async function executeCommand(interaction: ContextMenuCommandInteraction, game: Game) {
-	const user = interaction.options.getUser('player')?.id
+	const user = interaction.targetId
     const player = user ? await game.getPlayer(BigInt(user)) : undefined;
     if (player) {
         const trickPages = await game.getPlayerTricksPages(player.tricks)
@@ -64,13 +64,13 @@ async function executeCommand(interaction: ContextMenuCommandInteraction, game: 
             }).catch(console.error);
         } else {
             await interaction.reply({
-                content: "Error: provided trick not found",
+                content: "Error: provided user has no data",
                 ephemeral: true
             }).catch(console.error);
         }
     } else {
         await interaction.reply({
-            content: "Error: trick name not provided",
+            content: "Error: provided user has no data",
             ephemeral: true
         }).catch(console.error);
     }

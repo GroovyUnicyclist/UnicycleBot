@@ -3,9 +3,9 @@ import { Command } from '../command';
 import { Game } from '../game';
 
 function getStringWithSpaces(str: string, spaces: number, prepend: boolean = false): string {
-    var output = str;
-    var end = spaces - output.length;
-    for (var i = 0; i < end; i++) {
+    let output = str;
+    let end = spaces - output.length;
+    for (let i = 0; i < end; i++) {
         if (prepend) {
            output = ` ${output}` 
         } else {
@@ -17,8 +17,8 @@ function getStringWithSpaces(str: string, spaces: number, prepend: boolean = fal
 }
 
 async function formatTrickLanders(trick: string, page: number, game: Game): Promise<string> {
-    var output = "";
-    var trickLanders = await game.getPaginatedTrickLanders(trick, page);
+    let output = "";
+    let trickLanders = await game.getPaginatedTrickLanders(trick, page);
     trickLanders.forEach(trickLander => {
         output += `<@${trickLander}>\n`
     })
@@ -26,10 +26,10 @@ async function formatTrickLanders(trick: string, page: number, game: Game): Prom
 }
 
 async function formatPlayerTricks(user: string, page: number, game: Game): Promise<string> {
-    var output = "";
-    var tricks = await game.getPaginatedPlayerTricks(user, page);
+    let output = "";
+    let tricks = await game.getPaginatedPlayerTricks(user, page);
     for (const trick of tricks) {
-        var trickScore = await game.getTrickScore(trick)
+        let trickScore = await game.getTrickScore(trick)
         if (trickScore >= 0) {
             output += `\`${getStringWithSpaces(trickScore + ' points', 9)} - \` ${trick}\n`
         }
@@ -46,7 +46,7 @@ async function createButtons(page: number, lastPage: number, game: Game, trickNa
     const trick = await game.getTrick(trickName)
     const example = trick ? trick.example_link : undefined
     const tutorial = trick ? trick.tutorial : undefined
-    var actionRow = new ActionRowBuilder()
+    let actionRow = new ActionRowBuilder()
         .setComponents([
             new ButtonBuilder()
                 .setCustomId('stats_prev')
@@ -111,7 +111,7 @@ async function executeTrickCommand(interaction: ChatInputCommandInteraction, gam
         }
     } else {
         await interaction.reply({
-            content: "Error: user not provided",
+            content: "Error: provided trick not found",
             ephemeral: true
         }).catch(console.error);
     }
@@ -136,7 +136,7 @@ async function executePlayerCommand(interaction: ChatInputCommandInteraction, ga
         }
     } else {
         await interaction.reply({
-            content: "Error: trick name not provided",
+            content: "Error: provided user has no data",
             ephemeral: true
         }).catch(console.error);
     }
@@ -150,8 +150,8 @@ async function executeAutocomplete(interaction: AutocompleteInteraction, game: G
 }
 
 async function executeTrickButton(interaction: ButtonInteraction, game: Game) {
-    var trickName =  interaction.message.embeds[0]?.title?.match(/.*: (.*)/)?.pop()
-    var currentPage = parseInt(interaction.message.embeds[0]?.footer?.text.replace(/^(\d+)(.+)$/i, '$1') ?? '1');
+    let trickName =  interaction.message.embeds[0]?.title?.match(/.*: (.*)/)?.pop()
+    let currentPage = parseInt(interaction.message.embeds[0]?.footer?.text.replace(/^(\d+)(.+)$/i, '$1') ?? '1');
     const trick = trickName ? await game.getTrick(trickName) : undefined;
     if (trick) {
         const trickPages = await game.getTrickPlayersPages(trick)
@@ -182,8 +182,8 @@ async function executeTrickButton(interaction: ButtonInteraction, game: Game) {
 }
 
 async function executePlayerButton(interaction: ButtonInteraction, game: Game) {
-    var user =  interaction.message.embeds[0]?.description?.match(/.*<@(.*)>/)?.pop()
-    var currentPage = parseInt(interaction.message.embeds[0]?.footer?.text.replace(/^(\d+)(.+)$/i, '$1') ?? '1');
+    let user =  interaction.message.embeds[0]?.description?.match(/.*<@(.*)>/)?.pop()
+    let currentPage = parseInt(interaction.message.embeds[0]?.footer?.text.replace(/^(\d+)(.+)$/i, '$1') ?? '1');
     const player = user ? await game.getPlayer(BigInt(user)) : undefined;
     if (player) {
         const trickPages = await game.getPlayerTricksPages(player.tricks)

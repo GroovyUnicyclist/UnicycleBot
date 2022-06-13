@@ -10,9 +10,9 @@ import { Game } from '../game';
  * @returns 
  */
 function getStringWithSpaces(str: string, spaces: number, prepend: boolean = false): string {
-    var output = str;
-    var end = spaces - output.length;
-    for (var i = 0; i < end; i++) {
+    let output = str;
+    let end = spaces - output.length;
+    for (let i = 0; i < end; i++) {
         if (prepend) {
            output = ` ${output}` 
         } else {
@@ -29,10 +29,10 @@ function getStringWithSpaces(str: string, spaces: number, prepend: boolean = fal
  * @returns 
  */
 async function formatLeaderboard(page: number, game: Game): Promise<string> {
-    var players = await game.getPaginatedLeaderboard(page);
-    var output = "`Rank Points User`\n";
-    for (var i = 0; i < players.length; i++) {
-        var playerScore = await game.getPlayerScore(BigInt(players[i]!.id));
+    let players = await game.getPaginatedLeaderboard(page);
+    let output = "`Rank Points User`\n";
+    for (let i = 0; i < players.length; i++) {
+        let playerScore = await game.getPlayerScore(BigInt(players[i]!.id));
         output += `\`${getStringWithSpaces(((page-1)*10 + i + 1) + '.', 5)}${getStringWithSpaces(playerScore.toString(), 6)}\` <@${players[i]!.id}>\n`
     }
     return output
@@ -84,7 +84,7 @@ async function executeCommand(interaction: ChatInputCommandInteraction, game: Ga
 }
 
 async function executeButton(interaction: ButtonInteraction, game: Game) {
-    var currentPage = parseInt(interaction.message.embeds[0]?.footer?.text.replace(/^(\d+)(.+)$/i,'$1') ?? '1');
+    let currentPage = parseInt(interaction.message.embeds[0]?.footer?.text.replace(/^(\d+)(.+)$/i,'$1') ?? '1');
     if (currentPage <= 0 || currentPage > await game.getLeaderboardPages()) {
         await interaction.reply({
             content: 'Error: Unable to change page',

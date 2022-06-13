@@ -20,12 +20,12 @@ async function resetData() {
         prisma.player.deleteMany({})
     ])
 
-    var data: GameData = untypedData ?? {"players": {}, "tricks": {}};
-    var tricks = Object.keys(data.tricks)
-    var players = Object.keys(data.players)
-    var trickQuery: {data: trick[]} = {data: []}
-    var playerQuery: {data: player[]} = {data: []}
-    var playerTrickQuery: {data: player_trick[]} = {data: []}
+    let data: GameData = untypedData ?? {"players": {}, "tricks": {}};
+    let tricks = Object.keys(data.tricks)
+    let players = Object.keys(data.players)
+    let trickQuery: {data: trick[]} = {data: []}
+    let playerQuery: {data: player[]} = {data: []}
+    let playerTrickQuery: {data: player_trick[]} = {data: []}
     players.forEach(player => {
         playerQuery.data.push({
             id: BigInt(player),
@@ -66,9 +66,9 @@ async function resetData() {
 
 async function main() {
     // const allPlayers = await prisma.player.findMany()
-    // var leaderboard = allPlayers.sort((a, b) => (a.score < b.score ? 1 : -1));
+    // let leaderboard = allPlayers.sort((a, b) => (a.score < b.score ? 1 : -1));
     // const allTricks = await prisma.trick.findMany()
-    // var tricks = allTricks.sort((a, b) => (a.name > b.name ? 1 : -1))
+    // let tricks = allTricks.sort((a, b) => (a.name > b.name ? 1 : -1))
     // console.log(leaderboard)
     // console.log(tricks)
     // game.addTrickRecipient('180 unispin', '12345')
