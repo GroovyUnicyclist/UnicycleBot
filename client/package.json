@@ -44,5 +44,6 @@
   "devDependencies": {
     "react-router-dom": "^6.3.0"
   },
-  "proxy" : "http://localhost:3001"
+  "proxy" : "http://localhost:3001",
+  "homepage": "https://unicycling.party"
 }

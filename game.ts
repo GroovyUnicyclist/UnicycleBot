@@ -2,8 +2,14 @@ import { ApplicationCommandOptionChoiceData } from 'discord.js';
 import { player, player_trick, PrismaClient, trick } from '@prisma/client'
 
 const PAGE_SIZE = 10
-
+interface trickUpdateInput {
+    example_video?: string,
+    example_link?: string,
+    example_player?: bigint,
+    tutorial?: string
+}
 export class Game {
+
     private prisma: PrismaClient;
 
     constructor(prisma: PrismaClient = new PrismaClient()) {
@@ -535,6 +541,24 @@ export class Game {
                 return true;
             }
             return false;
+        } catch (error) {
+            console.error(error);
+            return false;
+        }
+    }
+
+    public async updateTrick(trickName: string, example_video: string | null, example_link: string | null, example_player: bigint | null, tutorial: string | null): Promise<boolean> {
+        try {
+            const data: trickUpdateInput = {}
+            if (example_video) data.example_video = example_video
+            if (example_link) data.example_link = example_link
+            if (example_player) data.example_player = example_player
+            if (tutorial) data.tutorial = tutorial
+            await this.prisma.trick.update({
+                where: { name: trickName},
+                data: data
+            });
+            return true;
         } catch (error) {
             console.error(error);
             return false;

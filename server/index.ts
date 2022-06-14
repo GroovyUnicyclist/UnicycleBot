@@ -20,7 +20,7 @@ app.get("/api/tricks", async (req: express.Request, res: express.Response) => {
     res.json(tricks);
 });
 
-app.get("/api/trick/:name", async (req: express.Request, res: express.Response) => {
+app.get("/api/tricks/:name", async (req: express.Request, res: express.Response) => {
     const prisma = new PrismaClient();
     const game = new Game(prisma);
     const trick: trick | null = req.params.name ? await game.getTrick(req.params.name) : null;
