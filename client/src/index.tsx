@@ -9,6 +9,7 @@ import Discord from "./pages/Discord";
 import NoPage from "./pages/NoPage";
 import Home from "./pages/Home";
 import Trick from "./pages/Trick";
+import DiscordInvite from "./pages/DiscordInvite";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -21,6 +22,7 @@ root.render(
           <Route index element={<Home />} />
           <Route path="tricktionary" element={<Tricktionary />} />
           <Route path="discord" element={<Discord />} />
+          <Route path="discord/invite" element={<DiscordInvite />} />
           <Route path="tricks/:name" element={<Trick />} />
           <Route path="*" element={<NoPage />} />
         </Route>
