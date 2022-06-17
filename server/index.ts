@@ -28,6 +28,6 @@ app.get("/api/tricks/:name", async (req: express.Request, res: express.Response)
     res.json(trick);
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, 'localhost', () => {
     console.log(`Server listening on ${PORT}`);
 });
