@@ -1,8 +1,12 @@
 import { Prisma, PrismaClient, trick } from '@prisma/client';
 import express from 'express';
+const http = require('http');
 import { Game } from '../game';
 const PORT = process.env.PORT || 3001;
 const app = express();
+const server = http.createServer(app);
+
+
 (BigInt.prototype as any).toJSON = function () {
     return Number(this)
 };
@@ -28,6 +32,7 @@ app.get("/api/tricks/:name", async (req: express.Request, res: express.Response)
     res.json(trick);
 });
 
-app.listen(PORT, 'localhost', () => {
+server.listen(PORT, 'localhost');
+server.on('listening', function() {
     console.log(`Server listening on ${PORT}`);
 });
